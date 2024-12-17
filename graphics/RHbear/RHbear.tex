@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+
+\begin{document}
+\begin{center}
+\begin{tikzpicture}
+
+%Голова
+\draw[fill=white, line width=2mm] (0, 0) circle (2);
+ 
+%Глаза
+\draw[black, line width=2mm] (-0.98, 0.3) circle (1); 
+\draw[fill=black, line width=0.5mm] (-1,0.3) ellipse (0.2cm and 0.9cm);
+\draw[black, line width=2mm] (1, 0.3) circle (1); 
+\draw[fill=black, line width=0.5mm] (1,0.3) ellipse (0.2cm and 1cm);
+
+%Правое ухо                                         
+\draw[line width=2mm] (0.7, 1.9) arc[start angle=170, end angle=-80, radius=10mm];
+\draw[line width=2mm] (1.1, 1.7) arc[start angle=170, end angle=-80, radius=5mm];
+
+%Левое ухо
+\draw[line width=2mm] (-0.7, 1.9) arc[start angle=10, end angle=260, radius=10mm];
+\draw[line width=2mm] (-1.1, 1.7) arc[start angle=10, end angle=260, radius=5mm];
+
+%Рот
+\draw[black, line width=2mm] (-1.8, -0.7) -- (1.8, -0.7);
+\draw[black, line width=2mm] (-1.5, -1.4) -- (-1.1, -0.7);
+\draw[black, line width=2mm] (-0.8, -1.8) -- (-1.1, -0.7);
+\draw[black, line width=2mm] (-0.8, -1.8) -- (-0.3, -0.7);
+\draw[black, line width=2mm] (0, -2) -- (-0.3, -0.7);
+\draw[black, line width=2mm] (0, -2) -- (0.5, -0.7);
+\draw[black, line width=2mm] (0.8, -1.8) -- (0.5, -0.7);
+\draw[black, line width=2mm] (0.8, -1.8) -- (1.24, -0.7);
+\draw[black, line width=2mm] (1.5, -1.3) -- (1.24, -0.7);
+
+\end{tikzpicture}
+\end{center}
+\end{document}
