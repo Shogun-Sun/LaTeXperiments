@@ -1,10 +1,31 @@
 \documentclass{article}
 \usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{xcolor}
+
 \pgfplotsset{compat=1.17}
+
+\lstset{
+  backgroundcolor=\color{white},   % Цвет фона
+  basicstyle=\ttfamily\small,           % Шрифт и размер текста
+  breaklines=true,                      % Перенос строк
+  captionpos=b,                         % Позиция заголовка
+  numbers=left,    
+  frame=single,                       % Обрамление
+  numberstyle=\small\color{black},        % Стиль для номеров строк
+  keywordstyle=\color{yellow!30!orange},            % Стиль для ключевых слов
+  commentstyle=\color{green},           % Стиль для комментариев
+  stringstyle=\color{red},              % Стиль для строк
+  showstringspaces=false,               % Не показывать пробелы в строках
+  xleftmargin=0mm,  
+  xrightmargin=-11mm,
+  morekeywords={begin, end, draw, fill, arc, circle, ellipse}  % Добавляем специфичные команды для TikZ как ключевые слова
+}
+
 
 \begin{document}
 \begin{center}
-\begin{tikzpicture}
+\begin{tikzpicture}[scale=1.3]
 
 %Голова
 \draw[fill=white, line width=2mm] (0, 0) circle (2);
@@ -35,5 +56,30 @@
 \draw[black, line width=2mm] (1.5, -1.3) -- (1.24, -0.7);
 
 \end{tikzpicture}
+
+
+
+\begin{lstlisting}
+    \begin{tikzpicture}
+        \draw[fill=white, line width=2mm] (0, 0) circle (2);
+        \draw[black, line width=2mm] (-0.98, 0.3) circle (1); 
+        \draw[fill=black, line width=0.5mm] (-1,0.3) ellipse (0.2cm and 0.9cm);
+        \draw[black, line width=2mm] (1, 0.3) circle (1); 
+        \draw[fill=black, line width=0.5mm] (1,0.3) ellipse (0.2cm and 1cm);
+        \draw[line width=2mm] (0.7, 1.9) arc[start angle=170, end angle=-80, radius=10mm];
+        \draw[line width=2mm] (1.1, 1.7) arc[start angle=170, end angle=-80, radius=5mm];
+        \draw[line width=2mm] (-0.7, 1.9) arc[start angle=10, end angle=260, radius=10mm];
+        \draw[line width=2mm] (-1.1, 1.7) arc[start angle=10, end angle=260, radius=5mm];
+        \draw[black, line width=2mm] (-1.8, -0.7) -- (1.8, -0.7);
+        \draw[black, line width=2mm] (-1.5, -1.4) -- (-1.1, -0.7);
+        \draw[black, line width=2mm] (-0.8, -1.8) -- (-1.1, -0.7);
+        \draw[black, line width=2mm] (-0.8, -1.8) -- (-0.3, -0.7);
+        \draw[black, line width=2mm] (0, -2) -- (-0.3, -0.7);
+        \draw[black, line width=2mm] (0, -2) -- (0.5, -0.7);
+        \draw[black, line width=2mm] (0.8, -1.8) -- (0.5, -0.7);
+        \draw[black, line width=2mm] (0.8, -1.8) -- (1.24, -0.7);
+        \draw[black, line width=2mm] (1.5, -1.3) -- (1.24, -0.7);
+    \end{tikzpicture}
+\end{lstlisting}  
 \end{center}
 \end{document}
