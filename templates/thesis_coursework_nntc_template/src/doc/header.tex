@@ -1,0 +1,165 @@
+%%% Здесь выбираются необходимые графы
+\documentclass[russian,utf8,pointsection,nocolumnsxix,nocolumnxxxi,nocolumnxxxii]{eskdtext}
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text} % Для того чтобы работали стандартные сочетания символов ---, --, << >> и т.п.
+
+%%% Что бы работал eskdx и некоторые другие пакеты LaTeX
+\usepackage{xecyr}
+
+%%% Для работы шрифтов
+\usepackage{xunicode,xltxtra}
+
+\usepackage{xcolor} % для управления цветами
+\usepackage{tcolorbox} % для создания рамок
+\usepackage{tikz} % Подключение пакета tikz
+
+\usepackage{hyperref}
+
+%%% Для работы с русскими текстами (расстановки переносов, последовательность комманд строго обязательна)
+%\usepackage{polyglossia}
+%\setdefaultlanguage{russian}
+%\newfontfamily{\cyrillicfontt}{GOST_B}
+%\set{GOST_type_A}
+\setmainfont{Times New Roman}
+\setromanfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Courier New}
+
+\usepackage[numbercenter]{eskdplain} %отключить рамки
+
+% polyglossia only
+% \newfontfamily\cyrillicfont{GOST_type_A} 
+% \newfontfamily\cyrillicfontrm{GOST_type_A}
+% \newfontfamily\cyrillicfonttt{GOST_type_A}
+% \newfontfamily\cyrillicfontsf{GOST_type_A}
+%\defaultfontfeatures{Mapping=tex-text}
+
+%%% Для работы со сложными формулами
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+%%% Что бы использовать символ градуса (°) - \degree
+\usepackage{gensymb}
+
+% Настройка заголовков
+\ESKDsectStyle{section}{\sffamily\Large\bfseries} % Разделы — Arial, крупный, жирный
+\ESKDsectStyle{subsection}{\sffamily\large\bfseries} % Подразделы — Arial, меньше, жирный
+\ESKDsectStyle{subsubsection}{\sffamily\normalsize} % Подподразделы — Arial, нормальный размер
+
+% Переопределение шрифта заголовков
+\renewcommand{\ESKDtitleFontI}{\rmfamily\normalsize} % Без засечек, жирный, крупный
+\renewcommand{\ESKDtitleFontII}{\rmfamily\normalsize} % не жирный
+\renewcommand{\ESKDtitleFontIII}{\rmfamily\normalsize} % не жирный
+\renewcommand{\ESKDtitleFontIV}{\rmfamily\normalsize} % не жирный
+\renewcommand{\ESKDtitleFontV}{\rmfamily\normalsize} % не жирный
+\renewcommand{\ESKDtitleFontVI}{\rmfamily\normalsize} % не жирный
+\renewcommand{\ESKDtitleFontVII}{\rmfamily\normalsize} % не жирный
+\renewcommand{\ESKDtitleFontVIII}{\rmfamily\normalsize} % не жирный
+\renewcommand{\ESKDtitleFontIX}{\rmfamily\normalsize} % не жирный
+\renewcommand{\ESKDtitleFontX}{\rmfamily\normalsize} % не жирный
+
+\makeatletter
+\newcommand{\ESKDNNTCspeciality}[1]{%
+  \def\ESKDNNTC@speciality{#1}%
+}
+\newcommand{\ESKDNNTCqualification}[1]{%
+  \def\ESKDNNTC@qualification{#1}%
+}
+\newcommand{\ESKDNNTCsubject}[1]{%
+  \def\ESKDNNTC@subject{#1}%
+}
+
+\renewcommand{\ESKDtheTitleFieldIV}{%
+  \MakeUppercase{\ESKDtheTitle}\par
+  \vspace{2mm}
+  \ESKDNNTC@subject\par
+  \vspace{2mm}
+  \ESKDtheDocName
+}
+
+\renewcommand{\ESKDtheTitleFieldI}{%
+  \ESKDtheDepartment\par
+  \ESKDtheCompany\par
+  \ESKDNNTC@speciality\par
+  \ESKDNNTC@qualification
+}
+\makeatother
+
+\newcommand{\ESKDNNTCtitle}[3]{%
+  \renewcommand{\ESKDtheTitleFieldVIII}{%
+    \noindent
+    \begin{minipage}[t]{0.45\textwidth}
+      Выполнил студент группы\\
+      #1\\
+      #2\\[2mm]
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+      Проверил преподаватель\\
+      #3\\
+      Проект защищен с оценкой: \makebox[6mm]{\hrulefill}\\
+      Дата защиты: \underline{\hspace{30mm}}\\
+    \end{minipage}%
+
+    \vspace{5mm}
+
+    \noindent
+    \begin{minipage}[t]{0.45\textwidth}
+      \mbox{Подпись студента:} \underline{\hspace{20mm}}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+      \mbox{Подпись преподавателя:} \underline{\hspace{20mm}}
+    \end{minipage}%
+  }
+}
+
+\newcommand{\ESKDNNTCcitydate}[2]{%
+  \def\@ESKDNNTCcity{#1}
+  \ESKDdate{#2}
+}
+
+\renewcommand{\ESKDtheTitleFieldX}{\@ESKDNNTCcity, \ESKDtheYear}
+
+
+%%% Для переноса составных слов
+%\XeTeXinterchartokenstate=1
+\XeTeXcharclass `\- 24
+\XeTeXinterchartoks 24 0 ={\hskip\z@skip}
+\XeTeXinterchartoks 0 24 ={\nobreak}
+
+%%% Ставим подпись к рисункам. Вместо «рис. 1» будет «Изображение 1»
+\addto{\captionsrussian}{\renewcommand{\figurename}{Изображение}}
+%%% Убираем точки после цифр в заголовках
+\def\russian@capsformat{%
+  \def\postchapter{\@aftersepkern}%
+  \def\postsection{\@aftersepkern}%
+  \def\postsubsection{\@aftersepkern}%
+  \def\postsubsubsection{\@aftersepkern}%
+  \def\postparagraph{\@aftersepkern}%
+  \def\postsubparagraph{\@aftersepkern}%
+}
+
+
+
+% Автоматически переносить на след. строку слова которые не убираются
+% в строке
+\sloppy
+
+%%% Для вставки рисунков
+\usepackage{graphicx}
+
+%%% Для вставки интернет ссылок, полезно в библиографии
+\usepackage{url}
+
+%%% Подподразделы(\subsubsection) не выводим в содержании
+\setcounter{tocdepth}{2}
+
+%%% Каждый раздел (\section) с новой страницы
+\let\stdsection\section
+\renewcommand\section{\newpage\stdsection}
+
+%%% В введении нумерация подразделов идёт с буквой «В» (например В.1)
+\makeatletter
+\renewcommand\thesubsection{\ifnum\c@section=0{В.\arabic{subsection}}\else{\arabic{section}.\arabic{subsection}}\fi}
+\makeatother
