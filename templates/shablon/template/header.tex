@@ -1,0 +1,387 @@
+%%% Здесь выбираются необходимые графы% Render all \texttt{...} as «...»
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{«\oldtexttt{#1}»}
+
+\documentclass[russian,utf8,pointsection,reduceheight=2mm]{eskdtext}
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text} % Для того чтобы работали стандартные сочетания символов ---, --, << >> и т.п.
+
+%%% Установка выравнивания текста по ширине (согласно ГОСТ ЕСКД)
+\raggedbottom
+% \flushbottom % Закомментировано для предотвращения растягивания контента по вертикали
+
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+\setlength{\leftskip}{0.5cm}
+\setlength{\rightskip}{0.5cm}
+
+
+%%% Что бы работал eskdx и некоторые другие пакеты LaTeX
+\usepackage{xecyr}
+
+%%% Для работы шрифтов
+\usepackage{xunicode,xltxtra}
+
+%%% Для отображения кода
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{placeins}
+% Удаление вертикальных отступов до и после таблиц
+\usepackage{etoolbox}
+% \AtBeginEnvironment{table}{\vspace{-1em}} % Commented out or removed
+\AtBeginEnvironment{table}{\renewcommand{\baselinestretch}{1}\selectfont}
+
+% Настройка стиля листингов
+\lstset{
+  % basicstyle=\small\fontspec{3270 Nerd Font},
+  basicstyle=\fontsize{10}{12}\fontspec{Liberation Mono},
+  % numbers=left, % Removed line numbers
+  % numberstyle=\tiny, % Removed line numbers style
+  stepnumber=1,
+  numbersep=5pt,
+  backgroundcolor=\color{white},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  frame=single,
+  rulecolor=\color{black},
+  tabsize=2,
+  captionpos=b,
+  breaklines=true,
+  breakatwhitespace=false,
+  title=\lstname,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green!40!black},
+  stringstyle=\color{red},
+  keepspaces=true,
+  xleftmargin=1.0cm,
+  xrightmargin=1.0cm,
+  framexleftmargin=0.5cm,
+  framexrightmargin=0.5cm,
+  literate={а}{а}1 {б}{б}1 {в}{в}1 {г}{г}1 {д}{д}1 {е}{е}1 {ё}{ё}1
+           {ж}{ж}1 {з}{з}1 {и}{и}1 {й}{й}1 {к}{к}1 {л}{л}1 {м}{м}1 {н}{н}1
+           {о}{о}1 {п}{п}1 {р}{р}1 {с}{с}1 {т}{т}1 {у}{у}1 {ф}{ф}1 {х}{х}1
+           {ц}{ц}1 {ч}{ч}1 {ш}{ш}1 {щ}{щ}1 {ъ}{ъ}1 {ы}{ы}1 {ь}{ь}1 {э}{э}1
+           {ю}{ю}1 {я}{я}1
+           {А}{А}1 {Б}{Б}1 {В}{В}1 {Г}{Г}1 {Д}{Д}1 {Е}{Е}1 {Ё}{Ё}1
+           {Ж}{Ж}1 {З}{З}1 {И}{И}1 {Й}{Й}1 {К}{К}1 {Л}{Л}1 {М}{М}1 {Н}{Н}1
+           {О}{О}1 {П}{П}1 {Р}{Р}1 {С}{С}1 {Т}{Т}1 {У}{У}1 {Ф}{Ф}1 {Х}{Х}1
+           {Ц}{Ц}1 {Ч}{Ч}1 {Ш}{Ш}1 {Щ}{Щ}1 {Ъ}{Ъ}1 {Ы}{Ы}1 {Ь}{Ь}1 {Э}{Э}1
+           {Ю}{Ю}1 {Я}{Я}1
+}
+
+\usepackage{xcolor} % для управления цветами
+\usepackage{tcolorbox} % для создания рамок
+\usepackage{tikz} % Подключение пакета tikz
+\usetikzlibrary{positioning} % Для позиционирования узлов (например, below left=of ...)
+
+% Подключение пакета float для использования опции H
+\usepackage{float}
+
+%%% Для работы с русскими текстами (расстановки переносов, последовательность комманд строго обязательна)
+\usepackage{microtype} % Улучшенное выравнивание и переносы
+%\usepackage{polyglossia}
+%\setdefaultlanguage{russian}
+%\newfontfamily{\cyrillicfontt}{GOST_B}
+%\set{GOST_type_A}
+
+% 1. Создаем логическую переменную
+\newif\ifGOSTfont
+\GOSTfontfalse % по умолчанию выключено
+
+% 2. Макрос для переключения шрифтов
+\newcommand{\SwitchFonts}{%
+  \ifGOSTfont
+    % Если GOSTfont=true, ставим шрифты ГОСТ
+    \setmainfont{GOST_type_A}
+    \setromanfont{GOST_type_A}
+    \setsansfont{GOST_type_A}
+    \setmonofont{GOST_type_A}
+  \else
+    % Иначе стандартный Times New Roman
+    \setmainfont{Times New Roman}
+    \setromanfont{Times New Roman}
+    \setsansfont{Times New Roman}
+    \setmonofont{Times New Roman}
+  \fi
+}
+
+% 3. Макросы для включения и выключения GOST шрифтов
+\newcommand{\UseGOSTFont}{\GOSTfonttrue\SwitchFonts}
+\newcommand{\UseTimesFont}{\GOSTfontfalse\SwitchFonts}
+
+%\usepackage[numbercenter]{eskdplain} %отключить рамки
+
+% polyglossia only
+% \newfontfamily\cyrillicfont{GOST_type_A} 
+% \newfontfamily\cyrillicfontrm{GOST_type_A}
+% \newfontfamily\cyrillicfonttt{GOST_type_A}
+% \newfontfamily\cyrillicfontsf{GOST_type_A}
+%\defaultfontfeatures{Mapping=tex-text}
+
+%%% Для работы со сложными формулами
+\usepackage{amsmath}
+\numberwithin{equation}{section} % Нумерация формул вида (раздел.номер)
+\usepackage{amssymb}
+
+%%% Глобально отключаем курсив и жирный для текста и цифр в формулах
+% Используем пакет unicode-math для управления стилями
+\usepackage{unicode-math}
+% Устанавливаем основной математический шрифт и стиль
+\setmathfont{Times New Roman}
+\unimathsetup{math-style=TeX, bold-style=TeX}
+% Отключаем курсив для букв и цифр в формулах
+\everymath{\displaystyle\mathrm{}}
+\everydisplay{\displaystyle\mathrm{}}
+
+%%% Что бы использовать символ градуса (°) - \degree
+\usepackage{gensymb}
+
+
+%%% Для переноса составных слов
+%\XeTeXinterchartokenstate=1
+\XeTeXcharclass `\- 24
+\XeTeXinterchartoks 24 0 ={\hskip\z@skip}
+\XeTeXinterchartoks 0 24 ={\nobreak}
+
+% Глобально запрещаем перенос слов с дефисом
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+
+% Для листингов разрешаем переносы по дефису с помощью etoolbox
+% \ПередНачаломОкружения{lstlisting}{% % etoolbox hook in Russian, if babel/polyglossia aliases are active
+% \ПослеОкончанияОкружения{lstlisting}{\конецгруппы} % etoolbox hook in Russian
+\BeforeBeginEnvironment{lstlisting}{%
+  \begingroup
+  \hyphenpenalty=50 % Стандартное значение LaTeX по умолчанию
+  \exhyphenpenalty=50 % Стандартное значение LaTeX по умолчанию
+}
+\AfterEndEnvironment{lstlisting}{\endgroup}
+
+%%% Ставим подпись к рисункам. Вместо «рис. 1» будет «Рисунок 1»
+\addto{\captionsrussian}{\renewcommand{\figurename}{Рисунок}}
+%%% Переименовываем заголовок библиографии
+\addto{\captionsrussian}{\renewcommand{\refname}{Список используемых источников}}
+%%% Убираем точки после цифр в заголовках
+\def\russian@capsformat{%
+  \def\postchapter{\@aftersepkern}%
+  \def\postsection{\@aftersepkern}%
+  \def\postsubsection{\@aftersepkern}%
+  \def\postsubsubsection{\@aftersepkern}%
+  \def\postparagraph{\@aftersepkern}%
+  \def\postsubparagraph{\@aftersepkern}%
+}
+
+% Автоматически переносить на след. строку слова которые не убираются
+% в строке
+\sloppy
+
+%%% Для вставки рисунков
+\usepackage{graphicx}
+
+%%% Для вставки интернет ссылок, полезно в библиографии
+\usepackage{url}
+
+% Packages for breakable tables using tabularx (via ltxtable)
+\usepackage{array} % For advanced column specifications (e.g., >{\centering\arraybackslash}p{width})
+\usepackage{tabularx} % For tables with adjustable-width X columns and p{width} columns
+\usepackage{longtable} % For tables that span multiple pages
+\usepackage{ltxtable} % Combines longtable and tabularx: allows tabularx environments to break across pages.
+                      % Usage typically involves:
+                      % \begin{filecontents*}{mytable.tex}
+                      %   \begin{tabularx}{\linewidth}{...}
+                      %     \caption{My Table Caption}\label{tab:my_table}\\ % Caption and label go inside
+                      %     \hline
+                      %     Col1 & Col2 \\ % Header row
+                      %     \hline
+                      %   \endfirsthead % Header for the first page
+                      %
+                      %   \multicolumn{2}{c}{Continuation of Table \ref{tab:my_table}} \\ % Example continuation caption
+                      %   \hline
+                      %   Col1 & Col2 \\ % Header row for subsequent pages
+                      %   \hline
+                      %   \endhead
+                      %
+                      %   \hline
+                      %   \multicolumn{2}{r@{}}{Continued on next page} \\ % Footer for all pages except the last
+                      %   \endfoot
+                      %
+                      %   \hline % Footer for the last page
+                      %   \endlastfoot
+                      %
+                      %   % Table body
+                      %   data & data \\
+                      %   ...
+                      %   \end{tabularx}
+                      % \end{filecontents*}
+                      % \LTXtable{\linewidth}{mytable.tex} % Or \LTXtable{\textwidth}{mytable.tex}
+\usepackage{filecontents} % Helper to define content for ltxtable in the main .tex file
+
+%%% Подподразделы(\subsubsection) выводим в содержании
+\setcounter{tocdepth}{3}
+
+%%% Настройка размера и стиля заголовков
+\makeatletter
+% Настройка стиля section с переходом на новую страницу
+\renewcommand\section{\newpage\@startsection{section}{1}{\z@}%
+  {-3.5ex \@plus -1ex \@minus -.2ex}%
+  {1.0ex \@plus.2ex}%
+  {\normalfont\normalsize\bfseries\hspace{1.7cm}}}
+
+% Настройка стиля subsection с нумерацией
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {0.1ex}%
+  {\normalfont\normalsize\bfseries\hspace{1.7cm}}%
+}
+
+% Настройка стиля subsubsection без лишнего вертикального отступа после заголовка
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+  {-2.5ex\@plus -1ex \@minus -.2ex}%
+  {0.1ex}%
+  {\normalfont\normalsize\bfseries\hspace{1.7cm}}%
+}
+
+% Настройка стиля paragraph
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+  {0pt}%                                 Space before: set to 0pt
+  {0.1ex}%                               Space after (if on its own line)
+  {\normalfont\normalsize\bfseries\hspace{1.7cm}}%
+}
+\makeatother
+
+%%% В введении нумерация подразделов идёт с буквой «В» (например В.1)
+\makeatletter
+\renewcommand\thesubsection{\ifnum\c@section=0{В.\arabic{subsection}}\else{\arabic{section}.\arabic{subsection}}\fi}
+\makeatother
+
+% Подключение пакета для управления отступами заголовков
+\usepackage{titlesec}
+% Сдвиг section и subsection на 1.7cm (номер и заголовок)
+\titlespacing*{\section}{1.7cm}{*0}{*0}
+\titleformat{\section}[hang]{\normalfont\normalsize\bfseries}{\thesection}{0.7em}{}
+\titlespacing*{\subsection}{1.7cm}{*0}{*0}
+\titleformat{\subsection}[hang]{\normalfont\normalsize\bfseries}{\thesubsection}{0.7em}{}
+
+
+%%% Глобальная настройка списков itemize для отступа первой строки и переноса от левого края
+%\input{itemize-setup.tex}
+%
+% Настройка отступов для itemize с использованием enumitem
+% \leftskip и \rightskip уже установлены глобально
+\setlist[itemize]{
+  labelsep=0.5em,     % Стандартный отступ метки
+  rightmargin=0.5cm,    % Правый край списка совпадает с \rightskip
+  topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=0pt % Убираем пустые строки и делаем межстрочный интервал 1.0
+}
+\setlist[itemize,1]{leftmargin=0.5cm, itemindent=1.5cm}
+\setlist[itemize,2]{leftmargin=0.5cm, itemindent=2.0cm}
+\setlist[itemize,3]{leftmargin=0.5cm, itemindent=4.5cm}
+\setlist[itemize,4]{leftmargin=0.5cm, itemindent=6.0cm}
+% Альтернативная настройка enumerate без enumitem
+% \makeatletter
+% \renewcommand{\theenumi}{\asbuk{enumi}}
+% \renewcommand{\labelenumi}{\theenumi)}
+% \makeatother
+
+% Настройка отступов для description с использованием enumitem (аналогично itemize)
+\setlist[description]{
+  labelsep=0.5em,
+  rightmargin=0.5cm,
+  topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=0pt
+}
+\setlist[description,1]{leftmargin=0.5cm, itemindent=1.5cm}
+\setlist[description,2]{leftmargin=0.5cm, itemindent=2.0cm}
+\setlist[description,3]{leftmargin=0.5cm, itemindent=4.5cm}
+\setlist[description,4]{leftmargin=0.5cm, itemindent=6.0cm}
+
+
+
+
+\newcommand{\ESKDNNTCcitydate}[2]{%
+  \def\@ESKDNNTCcity{#1}
+  \ESKDdate{#2}
+}
+
+\renewcommand{\ESKDtheTitleFieldX}{\@ESKDNNTCcity, \ESKDtheYear}
+
+\newcommand{\ESKDNNTCtitle}[3]{%
+  \renewcommand{\ESKDtheTitleFieldVIII}{%
+    \fontsize{14pt}{16pt}\selectfont
+    \noindent
+    \begin{minipage}[t]{0.45\textwidth}
+      Выполнил студент группы\\
+      #1\\
+      #2\\[2mm]
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+      Проверил преподаватель\\
+      #3\\
+      Проект защищен с оценкой: \makebox[6mm]{\hrulefill}\\
+      Дата защиты: \underline{\hspace{30mm}}\\
+    \end{minipage}%
+
+    \vspace{5mm}
+
+    \noindent
+    \begin{minipage}[t]{0.45\textwidth}
+      \mbox{Подпись студента:} \underline{\hspace{20mm}}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+      \mbox{Подпись преподавателя:} \underline{\hspace{20mm}}
+    \end{minipage}%
+  }
+}
+
+\makeatletter
+\newcommand{\ESKDNNTCspeciality}[1]{%
+  \def\ESKDNNTC@speciality{#1}%
+}
+\newcommand{\ESKDNNTCqualification}[1]{%
+  \def\ESKDNNTC@qualification{#1}%
+}
+\newcommand{\ESKDNNTCsubject}[1]{%
+  \def\ESKDNNTC@subject{#1}%
+}
+\newcommand{\ESKDNNTCwork}[1]{
+  \def\ESKDNNTC@work{#1}
+}
+
+\renewcommand{\ESKDtheTitleFieldIV}{
+  \ESKDNNTC@work\par
+  \vspace{2mm}   
+  \ESKDNNTC@subject\par
+  \vspace{2mm}
+  \ESKDtheDocName
+  \vspace{170mm}
+}
+
+\renewcommand{\ESKDtheTitleFieldI}{%
+  \ESKDtheDepartment\par
+  \ESKDtheCompany\par
+  \vspace{5mm}
+  \ESKDNNTC@speciality\par
+  \ESKDNNTC@qualification
+}
+\makeatother
+
+
+% Добавить надписи снизу
+% Макрос для колонки XXXI
+\newcommand{\ESKDNNTCsetFirstFooter}[1]{%
+  \renewcommand{\ESKDcolumnXXXIname}{#1}%
+}
+
+% Макрос для колонки XXXII
+\newcommand{\ESKDNNTCsetSecondFooter}[1]{%
+  \renewcommand{\ESKDtheColumnXXXII}{#1}%
+}
+
+
+
+
+
+

@@ -1,0 +1,91 @@
+\documentclass{beamer}
+
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{fontspec}
+
+% Define custom colors
+\definecolor{spaceblue}{rgb}{0.1, 0.1, 0.3}   % Dark blue for space background
+\definecolor{starwhite}{rgb}{1.0, 1.0, 1.0}   % White for stars and text
+\definecolor{planetgreen}{rgb}{0.2, 0.6, 0.2} % Green for highlights
+
+% Set up the Beamer theme
+\setbeamertemplate{background}{
+  \begin{tikzpicture}[overlay, remember picture]
+    \fill[spaceblue] (current page.south west) rectangle (current page.north east); % Dark background
+  \end{tikzpicture}
+}
+
+\setbeamercolor{item}{fg=starwhite}  % Color for itemize
+\setbeamercolor{block title}{fg=starwhite, bg=spaceblue!80} % Block titles
+\setbeamercolor{block body}{fg=starwhite, bg=spaceblue!60}  % Block body
+\setbeamercolor{structure}{fg=planetgreen} % Highlight color for sections
+\setbeamercolor{section in toc}{fg=planetgreen}  % Section colors in the table of contents
+
+% Set the font to something more futuristic (if using XeLaTeX or LuaLaTeX)
+\setmainfont{Fira Sans}  % You can replace this with another font of your choice
+
+% Title page customizations
+\title{Exploration of the Universe}
+\author{Ivan Ivanov}
+\date{\today}
+
+\begin{document}
+
+% Title page
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Slide 1: What is Space?
+\begin{frame}
+  \frametitle{What is Space?}
+  Space is the vast, seemingly infinite expanse that surrounds Earth and contains all stars, planets, galaxies, and other celestial bodies.
+  
+  \begin{itemize}
+    \item \textbf{Stars}: Massive hot balls of gas.
+    \item \textbf{Planets}: Bodies that orbit stars.
+    \item \textbf{Black holes}: Regions of space with incredibly strong gravitational pull.
+  \end{itemize}
+\end{frame}
+
+% Slide 2: Why Explore Space?
+\begin{frame}
+  \frametitle{Why Explore Space?}
+  Space exploration allows us to:
+  \begin{itemize}
+    \item \alert{Understand the origins of the Universe.}
+    \item \alert{Discover new technologies that can benefit life on Earth.}
+    \item \alert{Access potential resources from other planets and asteroids.}
+  \end{itemize}
+\end{frame}
+
+% Slide 3: The Future of Space Exploration
+\begin{frame}
+  \frametitle{The Future of Space Exploration}
+  In the near future, we can expect:
+  \begin{enumerate}
+    \item Spacecraft capable of traveling to Mars.
+    \item Advances in technology for studying exoplanets.
+    \item Missions aimed at mining asteroids for valuable resources.
+  \end{enumerate}
+\end{frame}
+
+% Slide 4: Key Milestones
+\begin{frame}
+  \frametitle{Key Milestones in Space Exploration}
+  The major milestones that have shaped modern space exploration:
+  \begin{itemize}
+    \item \textbf{1957}: Launch of Sputnik, the first artificial satellite.
+    \item \textbf{1969}: The Moon landing by Apollo 11.
+    \item \textbf{2020}: Mars Rover Perseverance lands on Mars.
+  \end{itemize}
+\end{frame}
+
+% Slide 5: Conclusion
+\begin{frame}
+  \frametitle{Conclusion}
+  Space exploration is one of humanity's most exciting endeavors, expanding our knowledge of the universe and pushing the boundaries of technology. The future holds immense potential for discovery and innovation.
+\end{frame}
+
+\end{document}

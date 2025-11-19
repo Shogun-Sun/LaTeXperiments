@@ -1,0 +1,5 @@
+*.pdf
+_minted-ex*
+*.lo*
+*.out
+*.aux
