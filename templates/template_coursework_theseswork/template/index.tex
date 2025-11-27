@@ -1,0 +1,64 @@
+% !TeX program = xelatex
+
+%%% Загружаем заголовочный файл, который хранит все настройки и все подгружаемые пакеты
+\input{header}
+
+%%% Загружаем настройки пакета eskdx, там нужно заполнить информацию
+%%% о документе - ФИО авторов, название документов и т.п.
+\input{eskdx}
+
+%%% Загрузка всех сносок
+\input{parts/footnotes.tex}
+
+% Добавляем пакет tabularx для правильного отображения таблиц
+\usepackage[perpage,hang]{footmisc}
+\renewcommand{\thefootnote}{[\arabic{footnote}]}
+
+\setmonofont{Hack}
+
+% Добавление используемых источников, библиографии и т.д.
+\usepackage[
+    backend=biber,
+    style=numeric, 
+    sorting=nty
+]{biblatex}
+
+\addbibresource{sources.bib}
+\nocite{*}
+
+% Adjust spacing to 1pt
+\titlespacing*{\subsubsection}
+{0pt}{1pt}{1pt}
+% Document
+\begin{document}
+
+    %------------------------------------- Титульный лист
+    \maketitle
+
+    % Устанавливаем номер страницы для содержания
+    \setcounter{page}{2}
+
+    %------------------------------------- Сожержание
+%    \renewcommand{\contentsname}{\begin{center}\Large Содержание\end{center}}
+    \tableofcontents
+
+
+    \include{parts/part}
+
+    
+    \printbibliography
+\end{document}
+
+% Чтобы вставить изображение:
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=0.5\textwidth]{images/image.png}
+% \end{figure}
+
+% Работа с кодом:
+% \begin{codeblock}{Язык программирования}
+% --Ваш код здесь
+% \end{codeblock}
+
+% Использование сносок:
+% Пример сноски\footnote{\FootnotePrime}

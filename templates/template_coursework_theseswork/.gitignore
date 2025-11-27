@@ -1,0 +1,14 @@
+*.pdf
+_minted-index
+*.lo*
+*.out
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.pytxcode
+*.toc
+*.fls
+*.fdb_latexmk
+index.run.xml
+.idea
