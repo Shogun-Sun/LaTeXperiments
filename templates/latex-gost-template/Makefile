@@ -7,16 +7,11 @@ TARGET     = main
 
 all: pdf
 
-# Локальная пересборка с новым Dockerfile
 image-build:
 	docker build \
 		--build-arg USER_ID=$$(id -u) \
 		--build-arg GROUP_ID=$$(id -g) \
 		-t $(IMAGE_NAME) .
-
-# Пуш обновленного образа в Docker Hub
-image-push:
-	docker push $(IMAGE_NAME)
 
 pdf:
 	mkdir -p $(BUILD_DIR)
