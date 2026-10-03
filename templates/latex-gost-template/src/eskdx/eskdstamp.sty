@@ -19,6 +19,25 @@
 % This is automaticaly generated file, do not edit it.
 %
 
+% ============================================================
+% Настройки видимости ЕСКД
+% ============================================================
+
+\newif\ifConfigShowESKD
+\ConfigShowESKDtrue
+
+\newif\ifConfigShowFrame
+\ConfigShowFrametrue
+
+\newif\ifConfigShowStamp
+\ConfigShowStamptrue
+
+\newif\ifConfigShowCopiedBy
+\ConfigShowCopiedBytrue
+
+\newif\ifConfigShowFormat
+\ConfigShowFormattrue
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{eskdstamp}[2011/05/06 v0.98 Stamp GOST 2.104-68]
 
@@ -889,45 +908,99 @@ headheight=0mm,headsep=0mm,footskip=0mm]{geometry}
   \ESKDputOnStyle{formI}{zonelabels}{\ESKDdrawZoneLabelsI}
 \fi
 
-\ESKDnewStyle{formII}{\ifESKD@enable@columns@xxvii 62mm\else 40mm\fi}
-\ESKDputOnStyle{formII}{frame}{\ESKDdrawFrame}
-\ESKDputOnStyle{formII}{stamp}{\ESKDdrawStampII}
-\ifESKD@enable@columns@xix
-  \ESKDputOnStyle{formII}{columnsxix}{\ESKDdrawColumnsXIX}
-\fi
-\ifESKD@enable@columns@xxiv
-  \ESKDputOnStyle{formII}{columnsxxiv}{\ESKDdrawColumnsXXIV}
-\fi
-\ifESKD@enable@columns@xxvii
-  \ESKDputOnStyle{formII}{columnsxxvii}{\ESKDdrawColumnsXXVIIii}
-\fi
-\ifESKD@enable@column@xxxi
-  \ESKDputOnStyle{formII}{columnxxxi}{\ESKDdrawColumnXXXI}
-\fi
-\ifESKD@enable@column@xxxii
-  \ESKDputOnStyle{formII}{columnxxxii}{\ESKDdrawColumnXXXII}
-\fi
+\ESKDnewStyle{formII}{%
+    \ifESKD@enable@columns@xxvii
+    62mm%
+    \else
+    40mm%
+    \fi}
+
+\AtBeginDocument{%
+
+    \ifConfigShowFrame
+    \ESKDputOnStyle{formII}{frame}{\ESKDdrawFrame}
+    \fi
+
+    \ifConfigShowStamp
+    \ESKDputOnStyle{formII}{stamp}{\ESKDdrawStampII}
+    \fi
+
+    \ifESKD@enable@columns@xix
+    \ESKDputOnStyle{formII}{columnsxix}{\ESKDdrawColumnsXIX}
+    \fi
+
+    \ifESKD@enable@columns@xxiv
+    \ESKDputOnStyle{formII}{columnsxxiv}{\ESKDdrawColumnsXXIV}
+    \fi
+
+    \ifESKD@enable@columns@xxvii
+    \ESKDputOnStyle{formII}{columnsxxvii}{\ESKDdrawColumnsXXVIIii}
+    \fi
+
+    \ifESKD@enable@column@xxxi
+    \ifConfigShowCopiedBy
+    \ESKDputOnStyle{formII}{columnxxxi}{\ESKDdrawColumnXXXI}
+    \fi
+    \fi
+
+    \ifESKD@enable@column@xxxii
+    \ifConfigShowFormat
+    \ESKDputOnStyle{formII}{columnxxxii}{\ESKDdrawColumnXXXII}
+    \fi
+    \fi
+}
 
 \ESKDnewStyle{formIIab}{15mm}
-\ESKDputOnStyle{formIIab}{frame}{\ESKDdrawFrame}
-\ESKDputOnStyle{formIIab}{stamp}{%
-  \ifESKD@twoside%
-    \ifodd\c@page\ESKDdrawStampIIa\else\ESKDdrawStampIIb\fi%
-  \else\ESKDdrawStampIIa\fi}
-\ifESKD@enable@columns@xix
-  \ESKDputOnStyle{formIIab}{columnsxix}{%
-    \ifESKD@twoside\ifodd\c@page\ESKDdrawColumnsXIX\fi%
-    \else\ESKDdrawColumnsXIX\fi}
-\fi
-\ifESKD@enable@column@xxxi
-  \ESKDputOnStyle{formIIab}{columnxxxi}{\ESKDdrawColumnXXXI}
-\fi
-\ifESKD@enable@column@xxxii
-  \ESKDputOnStyle{formIIab}{columnxxxii}{\ESKDdrawColumnXXXII}
-\fi
-\ifESKD@zonelabels
-  \ESKDputOnStyle{formIIab}{zonelabels}{\ESKDdrawZoneLabelsII}
-\fi
+
+\AtBeginDocument{%
+
+    \ifConfigShowFrame
+    \ESKDputOnStyle{formIIab}{frame}{\ESKDdrawFrame}
+    \fi
+
+    \ifConfigShowStamp
+    \ESKDputOnStyle{formIIab}{stamp}{%
+        \ifESKD@twoside
+        \ifodd\c@page
+        \ESKDdrawStampIIa
+        \else
+            \ESKDdrawStampIIb
+        \fi
+        \else
+        \ESKDdrawStampIIa
+        \fi
+    }
+    \fi
+
+    \ifESKD@enable@columns@xix
+    \ESKDputOnStyle{formIIab}{columnsxix}{%
+        \ifESKD@twoside
+        \ifodd\c@page
+        \ESKDdrawColumnsXIX
+        \fi
+        \else
+        \ESKDdrawColumnsXIX
+        \fi
+    }
+    \fi
+
+    \ifESKD@enable@column@xxxi
+    \ifConfigShowCopiedBy
+    \ESKDputOnStyle{formIIab}{columnxxxi}{\ESKDdrawColumnXXXI}
+    \fi
+    \fi
+
+    \ifESKD@enable@column@xxxii
+    \ifConfigShowFormat
+    \ESKDputOnStyle{formIIab}{columnxxxii}{\ESKDdrawColumnXXXII}
+    \fi
+    \fi
+
+    \ifESKD@zonelabels
+    \ESKDputOnStyle{formIIab}{zonelabels}{\ESKDdrawZoneLabelsII}
+    \fi
+
+}
 
 \newlength{\ESKD@curpad@h}
 \newlength{\ESKD@curpad@v}
@@ -991,9 +1064,12 @@ headheight=0mm,headsep=0mm,footskip=0mm]{geometry}
 }
 
 \AddToHook{shipout/foreground}{%
+  \ifConfigShowESKD
     \ESKD@ShipoutPicture
     \put(1in,-1in){\usebox{\ESKDpicturebox}}%
+  \fi
 }
+
 
 \RequirePackage{chngpage}
 \RequirePackage{ifpdf}
