@@ -1,0 +1,55 @@
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+
+% --- 1. ОСНОВНОЙ ШРИФТ (С ЗАСЕЧКАМИ) ---
+\setmainfont{Times_New_Roman}[
+    Path           = ./fonts/serif/TimesNewRoman/ ,
+    Extension      = .ttf ,
+    UprightFont    = Times_New_Roman ,
+    BoldFont       = Times_New_Roman_Bold ,
+    ItalicFont     = Times_New_Roman_Italic ,
+    BoldItalicFont = Times_New_Roman_Bold_Italic
+]
+
+\newfontfamily\cyrillicfont{Times_New_Roman}[
+    Path           = ./fonts/serif/TimesNewRoman/ ,
+    Extension      = .ttf ,
+    UprightFont    = Times_New_Roman ,
+    BoldFont       = Times_New_Roman_Bold ,
+    ItalicFont     = Times_New_Roman_Italic ,
+    BoldItalicFont = Times_New_Roman_Bold_Italic
+]
+
+% --- 2. ШРИФТ БЕЗ ЗАСЕЧЕК (ДЛЯ РАМОК И ШТАМПОВ ЕСКД) ---
+\setsansfont{cmunss}[
+    Path        = ./fonts/sans/CmuSansSerif/ ,
+    Extension   = .ttf ,
+    UprightFont = cmunss ,
+    BoldFont    = cmunsx ,
+    ItalicFont  = cmunsi
+]
+
+\newfontfamily\cyrillicfontsf{cmunss}[
+    Path        = ./fonts/sans/CmuSansSerif/ ,
+    Extension   = .ttf ,
+    UprightFont = cmunss ,
+    BoldFont    = cmunsx ,
+    ItalicFont  = cmunsi
+]
+
+% --- 3. МОНОШИРИННЫЙ ШРИФТ (ДЛЯ ЛИСТИНГОВ КОДА) ---
+% Временно используем Times_New_Roman, пока файлы cmuntt не добавлены в fonts/mono
+\setmonofont{Times_New_Roman}[
+    Path        = ./fonts/serif/TimesNewRoman/ ,
+    Extension   = .ttf ,
+    UprightFont = Times_New_Roman
+]
+
+\newfontfamily\cyrillicfonttt{Times_New_Roman}[
+    Path        = ./fonts/serif/TimesNewRoman/ ,
+    Extension   = .ttf ,
+    UprightFont = Times_New_Roman
+]
