@@ -9,7 +9,7 @@
 % version 2003/12/01 or later.
 %
 % This work has the LPPL maintenance status "maintained".
-% 
+%
 % This Current Maintainer of this work is Konstantin Korikov.
 %
 % This work consists of all files listed in manifest.txt.
@@ -20,7 +20,7 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{eskdtext}[2010/01/14 v0.98 Textual Documentation]
+\ProvidesClass{eskdtext}[2026/10/03 v0.98-xetex Textual Documentation]
 
 \newcommand{\ESKD@docfont}{14pt}
 \newcommand{\ESKD@float@style}{single}

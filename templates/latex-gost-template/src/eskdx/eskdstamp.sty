@@ -934,50 +934,66 @@ headheight=0mm,headsep=0mm,footskip=0mm]{geometry}
 \setlength{\ESKD@curpad@h}{\ESKD@padding@h}
 \setlength{\ESKD@curpad@v}{\ESKD@padding@v}
 
-\RequirePackage{everyshi}
 \def\ESKD@curstyle{}
 \def\ESKD@thisstyle{}
 \def\ESKD@extra@Hook{}
 \def\ESKD@extra@ThisHook{}
+\def\ESKD@curstyle{}
+\def\ESKD@thisstyle{}
+\def\ESKD@extra@Hook{}
+\def\ESKD@extra@ThisHook{}
+
+\newsavebox{\ESKDpicturebox}
+
 \newcommand{\ESKD@ShipoutPicture}{%
-  \bgroup
     \ifESKD@twoside
-      \ifodd\c@page
-        \ESKDframeX=\ESKD@margin@si
-      \else
-        \ESKDframeX=\ESKD@margin@so
-      \fi
+    \ifodd\c@page
+    \ESKDframeX=\ESKD@margin@si
     \else
-      \ESKDframeX=\ESKD@margin@si
+        \ESKDframeX=\ESKD@margin@so
+    \fi
+    \else
+    \ESKDframeX=\ESKD@margin@si
     \fi
     \ESKDframeY=\ESKD@margin@b
     \ESKDstampX=\ESKDframeX
     \advance\ESKDstampX \ESKDframeW
     \advance\ESKDstampX -185mm
     \ESKDstampY=\ESKDframeY
-    \unitlength=1mm
-    \global\setbox\@cclv\vbox{%
-      \vbox{\let\protect\relax
-	\begin{picture}(0,0)(\ESKDltu{\ESKD@origin@x},\ESKDltu{\ESKD@origin@y})%
-	  \ifx\ESKD@thisstyle\@empty
-	    \let\ESKD@thisstyle\ESKD@curstyle
-	  \fi
-	  \loop
-	  \ifnum \ESKD@hash@pos{@style@draw@\ESKD@thisstyle} %
-	    < \ESKD@hash@count{@style@draw@\ESKD@thisstyle}
-	    \ESKD@hash@next@value{@style@draw@\ESKD@thisstyle}\relax
-	  \repeat
-	  \ifx\ESKD@extra@ThisHook\@empty%
-	    \ESKD@extra@Hook\else\ESKD@extra@ThisHook%
-	  \fi%
-	  \global\let\ESKD@thisstyle\@empty%
-	  \global\let\ESKD@extra@ThisHook\@empty%
-	\end{picture}}%
-	\nointerlineskip%
-      \box\@cclv}%
-  \egroup
+
+    \sbox{\ESKDpicturebox}{%
+        \unitlength=1mm
+        \begin{picture}(0,0)(%
+        \ESKDltu{\ESKD@origin@x},%
+        \ESKDltu{\ESKD@origin@y})%
+
+        \ifx\ESKD@thisstyle\@empty
+        \let\ESKD@thisstyle\ESKD@curstyle
+        \fi
+
+        \loop
+        \ifnum \ESKD@hash@pos{@style@draw@\ESKD@thisstyle} %
+        < \ESKD@hash@count{@style@draw@\ESKD@thisstyle}
+        \ESKD@hash@next@value{@style@draw@\ESKD@thisstyle}\relax
+        \repeat
+
+        \ifx\ESKD@extra@ThisHook\@empty
+        \ESKD@extra@Hook
+        \else
+            \ESKD@extra@ThisHook
+        \fi
+
+        \global\let\ESKD@thisstyle\@empty
+        \global\let\ESKD@extra@ThisHook\@empty
+
+        \end{picture}%
+    }%
 }
-\EveryShipout{\ESKD@ShipoutPicture}
+
+\AddToHook{shipout/foreground}{%
+    \ESKD@ShipoutPicture
+    \put(1in,-1in){\usebox{\ESKDpicturebox}}%
+}
 
 \RequirePackage{chngpage}
 \RequirePackage{ifpdf}
