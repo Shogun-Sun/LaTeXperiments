@@ -135,15 +135,15 @@ REGULAR_FILES=()
 BOLD_FILES=()
 ITALIC_FILES=()
 BOLD_ITALIC_FILES=()
+BASE_FONT_NAME="${FONT_NAME,,}"
+BASE_FONT_NAME="${BASE_FONT_NAME//[^a-z0-9]/}"
 
 for font_file in "${FONT_FILES[@]}"; do
     file_name="$(basename "${font_file}")"
     lower_name="${file_name,,}"
 
-    # Переменные шрифты не используются.
-    if [[ "${lower_name}" == *variablefont* ]]; then
-        continue
-    fi
+    normalized_name="${lower_name%.ttf}"
+    normalized_name="${normalized_name//[^a-z0-9]/}"
 
     # Bold Italic
     if [[ "${lower_name}" =~ (^|[-_])bold[-_]?italic([._-]|$) ]]; then
@@ -157,8 +157,12 @@ for font_file in "${FONT_FILES[@]}"; do
     elif [[ "${lower_name}" =~ (^|[-_])italic([._-]|$) ]]; then
         ITALIC_FILES+=("${font_file}")
 
-    # Regular
+    # Regular с явным названием
     elif [[ "${lower_name}" =~ (^|[-_])regular([._-]|$) ]]; then
+        REGULAR_FILES+=("${font_file}")
+
+    # Regular без суффикса
+    elif [[ "${normalized_name}" == "${BASE_FONT_NAME}" ]]; then
         REGULAR_FILES+=("${font_file}")
     fi
 done
