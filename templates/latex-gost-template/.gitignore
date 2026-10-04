@@ -7,6 +7,10 @@
 !/fonts/sans/
 !/fonts/sans/IBMPlexSans/
 !/fonts/sans/IBMPlexSans/**
+!/fonts/sans/IBMPlexSansCondensed/
+!/fonts/sans/IBMPlexSansCondensed/**
+!/fonts/sans/IBMPlexSansSemiCondensed/
+!/fonts/sans/IBMPlexSansSemiCondensed/**
 
 # Сборка
 /build/
