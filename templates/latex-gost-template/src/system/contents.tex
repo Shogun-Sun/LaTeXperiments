@@ -1,0 +1,8 @@
+\newif\ifConfigShowTableOfContents
+\ConfigShowTableOfContentsfalse
+
+\newcommand{\ESKDtableofcontents}{%
+    \ifConfigShowTableOfContents
+    \tableofcontents
+    \fi
+}
