@@ -17,7 +17,7 @@ git clone https://github.com/Shogun-Sun/LaTeXperiments.git && cd LaTeXperiments/
 ```bash
 make
 ```
-> Примечание: для сборки используется докер контейнер [https://hub.docker.com/r/shogunsun/latex-builder](https://hub.docker.com/r/shogunsun/latex-builder). При выполнении make - он соберется автоматически, но вы так же можете собрать его из Dockerfile так же с помощью Makefile: ```make image-build```
+> Примечание: для сборки используется докер контейнер [shogunsun/latex-builder](https://hub.docker.com/r/shogunsun/latex-builder). При выполнении make он подтянется автоматически, но вы также можете собрать его локально из Dockerfile с помощью команды ```make image-build```.
 
 ## Лицензия и авторские права
 
