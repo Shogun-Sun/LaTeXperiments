@@ -1,0 +1,33 @@
+\RequirePackage[
+    backend=biber,
+    style=gost-numeric,
+    sorting=none
+]{biblatex}
+
+\newif\ifConfigShowBibliography
+\ConfigShowBibliographyfalse
+
+\newif\ifConfigBibliographyNumbered
+\ConfigBibliographyNumberedfalse
+
+\newif\ifConfigBibliographyAll
+\ConfigBibliographyAllfalse
+
+\newcommand{\ConfigBibliographyFile}{bibliography/sources.bib}
+
+\defbibheading{bibliography}[\bibname]{%
+    \section{#1}%
+}
+
+\newcommand{\ESKDbibliography}{%
+    \ifConfigShowBibliography
+    \ifConfigBibliographyAll
+    \nocite{*}%
+    \fi
+    \ifConfigBibliographyNumbered
+    \printbibliography[heading=bibliography]
+    \else
+    \printbibliography[heading=bibintoc]
+    \fi
+    \fi
+}

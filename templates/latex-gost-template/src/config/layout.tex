@@ -42,3 +42,25 @@
 % Каждый \section начинается с нового листа.
 \ConfigSectionNewPagetrue
 % \ConfigSectionNewPagefalse
+
+% ============================================================
+% Библиография
+% ============================================================
+
+% Показывать список источников.
+\ConfigShowBibliographytrue
+% \ConfigShowBibliographyfalse
+
+% Нумеровать список литературы.
+\ConfigBibliographyNumberedtrue
+% \ConfigBibliographyNumberedfalse
+
+% Включать все источники в список литературы,
+% даже если они не цитируются.
+\ConfigBibliographyAlltrue
+% \ConfigBibliographyAllfalse
+
+% Файл библиографии.
+\renewcommand{\ConfigBibliographyFile}{src/bibliography/sources.bib}
+
+\addbibresource{\ConfigBibliographyFile}

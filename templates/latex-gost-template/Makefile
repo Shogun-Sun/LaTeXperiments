@@ -20,7 +20,11 @@ pdf:
 		-e TEXINPUTS="./src//:" \
 		-e OSFONTDIR="/data/fonts//" \
 		$(IMAGE_NAME) \
-		sh -c "fc-cache -f && xelatex -shell-escape -output-directory=build src/main.tex && xelatex -shell-escape -output-directory=build src/main.tex"
+		sh -c "fc-cache -f && \
+			xelatex -shell-escape -output-directory=build src/main.tex && \
+			biber --input-directory=build --output-directory=build main && \
+			xelatex -shell-escape -output-directory=build src/main.tex && \
+			xelatex -shell-escape -output-directory=build src/main.tex"
 
 clean:
 	rm -rf $(BUILD_DIR)
