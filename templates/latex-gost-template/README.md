@@ -9,7 +9,7 @@
 
 ## Как собрать?
 
-1. Склонируйте репозиторий и перейдите в папку шаблона.
+1. Склонируйте репозиторий и перейдите в папку шаблона:
 ```bash
 git clone https://github.com/Shogun-Sun/LaTeXperiments.git && cd LaTeXperiments/templates/latex-gost-template/
 ```
