@@ -2,7 +2,11 @@
 .idea
 
 # Шрифты
-/fonts/
+/fonts/**
+
+!/fonts/sans/
+!/fonts/sans/IBMPlexSans/
+!/fonts/sans/IBMPlexSans/**
 
 # Сборка
 /build/
