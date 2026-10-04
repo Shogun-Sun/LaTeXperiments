@@ -26,6 +26,9 @@
 \newif\ifConfigShowESKD
 \ConfigShowESKDtrue
 
+\newif\ifESKD@skip@shipout
+\ESKD@skip@shipoutfalse
+
 \newif\ifConfigShowFrame
 \ConfigShowFrametrue
 
@@ -1074,10 +1077,14 @@ headheight=0mm,headsep=0mm,footskip=0mm]{geometry}
 
 \AddToHook{shipout/foreground}{%
   \ifConfigShowESKD
-    \ESKD@ShipoutPicture
-    \put(1in,-1in){\usebox{\ESKDpicturebox}}%
+    \ifESKD@skip@shipout
+    \else
+      \ESKD@ShipoutPicture
+      \put(1in,-1in){\usebox{\ESKDpicturebox}}%
+    \fi
   \fi
 }
+
 
 
 \RequirePackage{chngpage}

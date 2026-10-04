@@ -1,11 +1,28 @@
+\RequirePackage{pdfpages}
+
 \makeatletter
 
+\newif\ifESKD@titlepage@pdf
+\ESKD@titlepage@pdffalse
+
 \newcommand{\titlepagestyle}[1]{%
+    \ESKD@titlepage@pdffalse
     \def\ESKDTitlePageStyle{#1}%
 }
 
+\newcommand{\titlepagepdf}[1]{%
+    \ESKD@titlepage@pdftrue
+    \def\ESKDTitlePagePDF{#1}%
+}
+
 \newcommand{\ESKDtitlepage}{%
-    \input{layouts/system/titlepages/\ESKDTitlePageStyle.tex}%
+    \ifESKD@titlepage@pdf
+    \ESKD@skip@shipouttrue
+    \includepdf[pages=1]{\ESKDTitlePagePDF}%
+    \ESKD@skip@shipoutfalse
+    \else
+    \input{layouts/\ESKDTitlePageStyle.tex}%
+    \fi
 }
 
 \makeatother
