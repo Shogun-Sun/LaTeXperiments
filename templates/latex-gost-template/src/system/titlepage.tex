@@ -1,0 +1,11 @@
+\makeatletter
+
+\newcommand{\titlepagestyle}[1]{%
+    \def\ESKDTitlePageStyle{#1}%
+}
+
+\newcommand{\ESKDtitlepage}{%
+    \input{layouts/system/titlepages/\ESKDTitlePageStyle.tex}%
+}
+
+\makeatother
