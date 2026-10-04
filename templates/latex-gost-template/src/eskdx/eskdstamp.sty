@@ -682,13 +682,22 @@ headheight=0mm,headsep=0mm,footskip=0mm]{geometry}
     \usebox{\ESKD@column@xxx@box}}}
 \fi
 
+% Копировал
 \ifESKD@enable@column@xxxi
 \newcommand{\ESKDdrawColumnXXXI}{%
   \setlength{\ESKD@tmpdima}{\ESKDframeX+\ESKDframeW-120mm}%
   \setlength{\ESKD@tmpdimb}{\ESKDframeY-3.7mm}%
   \put(\ESKDltu{\ESKD@tmpdima},\ESKDltu{\ESKD@tmpdimb}){%
-    \makebox[70mm][r]{\ESKDfontIII\ESKDcolumnXXXIname\hspace{4em}}}}
+      \makebox[70mm][r]{%
+          \ESKDfontIII
+          \ESKDcolumnXXXIname
+          \hspace{4em}%
+          \ESKDtheCopiedBy
+      }%
+  }%
+}
 \fi
+
 
 \ifESKD@enable@column@xxxii
 \newcommand{\ESKDdrawColumnXXXII}{%
