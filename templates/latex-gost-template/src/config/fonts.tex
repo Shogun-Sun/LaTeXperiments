@@ -1,28 +1,18 @@
-\usepackage{fontspec}
-\usepackage{polyglossia}
+% ============================================================
+% Пользовательская настройка шрифта
+% ============================================================
 
-% Основной шрифт (с явным указанием пути к папке)
-\setmainfont{Times_New_Roman.ttf}[
-    Path          = fonts/serif/TimesNewRoman/,
-    BoldFont      = Times_New_Roman_Bold.ttf,
-    ItalicFont    = Times_New_Roman_Italic.ttf,
-    BoldItalicFont= Times_New_Roman_Bold_Italic.ttf
-]
+% ------------------------------------------------------------
+% Семейство
+% ------------------------------------------------------------
 
-% Кириллический шрифт для polyglossia (без принудительного Script=Cyrillic)
-\newfontfamily\cyrillicfont{Times_New_Roman.ttf}[
-    Path          = fonts/serif/TimesNewRoman/,
-    BoldFont      = Times_New_Roman_Bold.ttf,
-    ItalicFont    = Times_New_Roman_Italic.ttf,
-    BoldItalicFont= Times_New_Roman_Bold_Italic.ttf
-]
+\newcommand{\ConfigFontPath}{fonts/technical/gost/}
+\newcommand{\ConfigFontRegular}{gost_type_a.ttf}
 
-% Шрифты без засечек (ссылаемся на ту же папку, чтобы не зависеть от системных шрифтов)
-\newfontfamily\cyrillicfontsf{Times_New_Roman.ttf}[
-    Path          = fonts/serif/TimesNewRoman/,
-    BoldFont      = Times_New_Roman_Bold.ttf
-]
+% ------------------------------------------------------------
+% Начертания
+% ------------------------------------------------------------
 
-% Настройка языков
-\setmainlanguage{russian}
-\setotherlanguage{english}
+\newcommand{\ConfigFontBold}{gost_type_a.ttf}
+\newcommand{\ConfigFontItalic}{gost_type_a.ttf}
+\newcommand{\ConfigFontBoldItalic}{gost_type_a.ttf}

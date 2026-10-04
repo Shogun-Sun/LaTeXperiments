@@ -1,0 +1,35 @@
+% ============================================================
+% Шрифты и языки
+% ============================================================
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+% ------------------------------------------------------------
+% Основной шрифт
+% ------------------------------------------------------------
+
+\setmainfont{\ConfigFontRegular}[
+    Path = \ConfigFontPath,
+    BoldFont = \ConfigFontBold,
+    ItalicFont = \ConfigFontItalic,
+    BoldItalicFont = \ConfigFontBoldItalic
+]
+
+% ------------------------------------------------------------
+% Кириллический шрифт для Polyglossia
+% ------------------------------------------------------------
+
+\newfontfamily\cyrillicfont{\ConfigFontRegular}[
+    Path = \ConfigFontPath,
+    BoldFont = \ConfigFontBold,
+    ItalicFont = \ConfigFontItalic,
+    BoldItalicFont = \ConfigFontBoldItalic
+]
+
+% ------------------------------------------------------------
+% Языки
+% ------------------------------------------------------------
+
+\setmainlanguage{russian}
+\setotherlanguage{english}
